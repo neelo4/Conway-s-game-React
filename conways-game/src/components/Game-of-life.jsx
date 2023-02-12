@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Cell from './Cell';
-import Board from './Board';
+import React, { useState } from "react";
+import Cell from "./Cell";
+import Button from "./Button";
 
 const GameOfLife = () => {
-  const [board, setBoard] = useState(Array(20).fill(Array(20).fill(false)));
+  const [board, setBoard] = useState(Array(20).fill(Array(40).fill(false)));
   const [running, setRunning] = useState(false);
 
   const evolve = () => {
@@ -20,7 +20,12 @@ const GameOfLife = () => {
               }
               let rowIndex = i + x;
               let colIndex = j + y;
-              if (rowIndex >= 0 && rowIndex < board.length && colIndex >= 0 && colIndex < board[i].length) {
+              if (
+                rowIndex >= 0 &&
+                rowIndex < board.length &&
+                colIndex >= 0 &&
+                colIndex < board[i].length
+              ) {
                 if (board[rowIndex][colIndex]) {
                   alive++;
                 }
@@ -43,14 +48,14 @@ const GameOfLife = () => {
   };
 
   const reset = () => {
-    setBoard(Array(20).fill(Array(20).fill(false)));
+    setBoard(Array(20).fill(Array(40).fill(false)));
   };
 
   const create = () => {
     let newBoard = [];
     for (let i = 0; i < 20; i++) {
       let row = [];
-      for (let j = 0; j < 20; j++) {
+      for (let j = 0; j < 40; j++) {
         row.push(Math.random() < 0.5);
       }
       newBoard.push(row);
@@ -66,7 +71,7 @@ const GameOfLife = () => {
 
   return (
     <div>
-      <h1>Game of Life</h1>
+      <h1 className="banner">Game of Life</h1>
       <div>
         {board.map((row, i) => (
           <div key={i}>
@@ -75,7 +80,7 @@ const GameOfLife = () => {
                 key={j}
                 isAlive={cell}
                 toggleLife={() => {
-                  setBoard(prevBoard => {
+                  setBoard((prevBoard) => {
                     let newBoard = [...prevBoard];
                     newBoard[i][j] = !newBoard[i][j];
                     return newBoard;
@@ -86,18 +91,16 @@ const GameOfLife = () => {
           </div>
         ))}
       </div>
-      <button onClick={create}>Create</button>
-      <button onClick={reset}>Reset</button>
-       <button onClick={() => {
-setRunning(!running);
-evolve();
-}}
->
-{running ? 'Stop' : 'Start'}
-</button>
-      
-</div>
-
+      <Button title="Create" onClick={create} />
+      <Button title="Reset" onClick={reset} />
+      <Button
+        title={running ? "Stop" : "Start"}
+        onClick={() => {
+          setRunning(!running);
+          evolve();
+        }}
+      />
+    </div>
   );
-            }
-            export default GameOfLife;
+};
+export default GameOfLife;

@@ -1,0 +1,10 @@
+.btn{
+     background-color: #6cbac8;
+    cursor: pointer;
+    font-family: "Courier Prime", monospace;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 0.9rem;
+    padding: 20px;
+}

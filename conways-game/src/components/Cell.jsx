@@ -1,16 +1,19 @@
 import React from 'react';
 
-const Cell = ({ isAlive, toggleLife }) => (
-  <section className='cells'
-    style={{
-      width: '40px',
-      height: '20px',
-      backgroundColor: !isAlive ? 'black' : 'white',
-      border: '1px solid black',
-      display: 'inline-block'
-    }}
-    onClick={toggleLife}
-  />
-);
+
+const Cell = ({ isAlive, onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      style={{
+        width: 20,
+        height: 20,
+        backgroundColor: isAlive ? '#6cbac8' : 'black',
+        border: '1px solid #6a6a6a',
+        display: 'inline-block',
+      }}
+    />
+  );
+};
 
 export default Cell;
